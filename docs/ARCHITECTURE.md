@@ -47,3 +47,8 @@ UGLY DUCK TEK education is available even if the user never creates a token. For
 - Separate wallet signing permissions and explicit human approval for each transaction
 
 The architecture deliberately disables every gate that is not implemented. Static frontend validation is user convenience and is not a trust boundary.
+
+## V0.2 additive contract revision
+The `bodybagz.proposal.v1` interchange schema remains at version 1 for compatible consumers. Two **optional** fields were added: `reviewPrepared:boolean` (browser-local acknowledgement only) and `sourceUrl:string` (unverified original evidence URL). All legacy drafts remain parseable. Existing pre-V0.2 `review-preview` records lacking `reviewPrepared===true` revert to editable drafts; no submission or privilege is inferred.
+
+See [CHANGELOG.md](CHANGELOG.md) and [EXTRACTION_CHECKLIST.md](EXTRACTION_CHECKLIST.md) for release history, repo ownership, migration and future API boundaries.

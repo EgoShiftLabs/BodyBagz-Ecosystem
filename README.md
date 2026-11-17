@@ -1,4 +1,4 @@
-# BODYBAGZ ECOSYSTEM
+# BODYBAGZ ECOSYSTEM — V0.2 Integration Preview
 **We don't just chase the next meta. We build the people who create it.**
 
 A culture-first builder development preview that connects **UGLY DUCK TEK**, **Watchtower Crypto**, **BAGZ Forge**, and the **BAGZ Pairing Desk**. The parent project is **BodyBagz**; these modules are modular software and educational components, not one combined token protocol.
@@ -9,12 +9,12 @@ A culture-first builder development preview that connects **UGLY DUCK TEK**, **W
 - BodyBagz culture/project: https://bodybagz.org
 - Watchtower OS remains a separate public product: https://egoshiftlabs.github.io/EgoShiftLabs-Watchtower-OS/
 
-## What works in V0.1
+## What works in V0.2
 **UGLY DUCK TEK**: Six real learning modules, five questions each, 80% per-module passing rule, local progress, local practice milestone export. This is NOT an authenticated Builder Readiness Certificate and does not create an NFT.
 
 **Watchtower Crypto**: A manual, evidence-linked opportunity register and KOL/creator research bookmarks. Risk statements required for signals. Explicit examples are research prompts, NOT real-time crypto trends. No exchange, wallet, X/Twitter, token-holder, Pump.fun or KOL API is connected.
 
-**BAGZ Forge**: User-created project drafts, structured value/risk plans, one-click LOCAL research-to-project handoff, and a practice-gated review *preview*. No externally submitted application, official program acceptance, or token issuance.
+**BAGZ Forge**: User-created project drafts, structured value/risk plans, optional local research-to-project handoff, and practice-gated review *preview*. Users must independently revise and confirm the project plan and explicitly acknowledge that this is a client-side demonstration. No externally submitted application, official program acceptance, or token issuance.
 
 **BAGZ Pairing Desk**: Research-case transfer from Forge and an 8-item self-attested eligibility checklist; optional JSON exports. $BAGZ mint verification, pairing support for its exact mint, token launch privileges and signing are **unconfigured**. No wallet connection, pair creation, minting, swaps, liquidity management, private key capture or automatic launch.
 
@@ -22,17 +22,26 @@ A culture-first builder development preview that connects **UGLY DUCK TEK**, **W
 
 ## Architecture
 - Fully static ES modules, responsive CSS, browser localStorage and GitHub Pages. No Node runtime on the hosted site; Node is used for CI tests only.
-- Each product has its own file in \`modules/\` with standalone render/action/submit functions. The host \`assets/app.js\` handles navigation and module handoff via narrowly defined contracts.
+- Each product has its own file in `modules/` with standalone render/action/submit functions. The host `assets/app.js` handles navigation and module handoff via narrowly defined contracts.
 - Domain contracts and the future standalone-app boundaries are documented in [ARCHITECTURE.md](docs/ARCHITECTURE.md).
 - User content remains local to one browser; clearing storage, private browsing, or another device may make it unavailable. No encryption, account identity, secure certificate issuance, server-side review or guaranteed backup.
 - All manually entered records are **unverified** even if linked to a public URL. A domain URL does not prove the content of a claim.
 
+## V0.2 evidence and compatibility
+- **Read without JavaScript:** The HTML shell contains a useful explanation of all four modules rather than a blank boot message.
+- **Browser coverage:** Tests exercise quiz failure and retry, restoring an open lesson across reload, manual KOL research CRUD, HTTPS source validation, research-to-project handoff, explicit review confirmation, unique pairing forms, exports, project-deletion cascade, and mobile navigation. These tests do **not** substitute for a physical-device or screen-reader audit.
+- **Source trust:** User-entered research URLs must use HTTPS. Merely linking a source does not verify the claim.
+- **Local state schema:** `bodybagz-preview-state-v1` stays compatible; V0.2 adds optional `reviewPrepared` and `sourceUrl` proposal fields. Older V0.1 review-preview drafts without the new confirmation flag return to editable draft status on reload, without deleting the project content.
+- **No production privileges:** Practice passes remain editable browser state, not trusted credentials; no endpoint can approve real projects or initiate transactions.
+
+Read [CHANGELOG.md](docs/CHANGELOG.md) and [EXTRACTION_CHECKLIST.md](docs/EXTRACTION_CHECKLIST.md) before splitting applications into separate repositories.
+
 ## Developer run
-\`\`\`sh
+```sh
 python3 -m http.server 8000
 # open http://localhost:8000/
 npm run quality
-\`\`\`
+```
 
 Do not open index.html via file:// if your browser blocks ES module imports. The hosted version works from the repository's GitHub Pages base path because imports use relative URLs.
 
