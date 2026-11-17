@@ -18,7 +18,16 @@ export function validateState(s){
 }
 export function loadState(){
  try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return blankState();
- const obj=JSON.parse(raw);if(validateState(obj))return obj;console.warn("BodyBagz saved preview data was rejected; state reset.");
+ const obj=JSON.parse(raw);
+ if(validateState(obj)){
+  // Older V0.1 browser drafts were allowed to advance without editing.
+  // Reset ONLY those old review previews to drafts, preserving all their text and linked research.
+  for(const proposal of obj.proposals){
+   if(proposal.status==="review-preview"&&proposal.reviewPrepared!==true)proposal.status="draft";
+  }
+  return obj;
+ }
+ console.warn("BodyBagz saved preview data was rejected; state reset.");
  }catch(e){console.warn("Unable to read browser preview data.",e);}
  return blankState();
 }
