@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/pairing-review.v1.schema.json",
+  "title": "BodyBagz local pairing research checklist v1",
+  "description": "Self-attested due diligence only. No token launch, guaranteed quote eligibility or approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "proposalId",
+    "at",
+    "checks"
+  ],
+  "properties": {
+    "schema": {
+      "const": "bodybagz.pairing-review.v1"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "proposalId": {
+      "type": "string",
+      "maxLength": 110
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "checks": {
+      "type": "object",
+      "maxProperties": 12,
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "projectName": {
+      "type": "string",
+      "maxLength": 130
+    },
+    "status": {
+      "const": "research-only"
+    },
+    "notice": {
+      "type": "string",
+      "maxLength": 300
+    }
+  }
+}

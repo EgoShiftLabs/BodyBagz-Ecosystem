@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/proposal.v1.schema.json",
+  "title": "BodyBagz local project draft, v1",
+  "description": "Browser-only user proposal. Never implies receipt, acceptance or endorsement.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "name",
+    "category",
+    "pitch",
+    "value",
+    "risk",
+    "signalId",
+    "status",
+    "at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "bodybagz.proposal.v1"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "name": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 130
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "pitch": {
+      "type": "string",
+      "minLength": 25,
+      "maxLength": 1500
+    },
+    "value": {
+      "type": "string",
+      "minLength": 25,
+      "maxLength": 1600
+    },
+    "risk": {
+      "type": "string",
+      "minLength": 15,
+      "maxLength": 1100
+    },
+    "signalId": {
+      "type": "string",
+      "maxLength": 110
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "review-preview"
+      ]
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notice": {
+      "type": "string",
+      "maxLength": 320
+    }
+  }
+}

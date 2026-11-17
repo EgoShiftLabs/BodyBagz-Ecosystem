@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/practice.v1.schema.json",
+  "title": "UGLY DUCK TEK unverified local practice record",
+  "description": "This JSON can be edited or fabricated by the browser owner and is NOT a verified certificate, NFT or authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "kind",
+    "completedAt",
+    "results",
+    "notice"
+  ],
+  "properties": {
+    "schema": {
+      "const": "bodybagz.local-practice.v1"
+    },
+    "kind": {
+      "const": "local-practice-only"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notice": {
+      "type": "string",
+      "maxLength": 350
+    },
+    "results": {
+      "type": "object",
+      "maxProperties": 6,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "score",
+          "attempts",
+          "passed",
+          "at"
+        ],
+        "properties": {
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "attempts": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

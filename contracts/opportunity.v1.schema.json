@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/opportunity.v1.schema.json",
+  "title": "BodyBagz source-backed opportunity, v1",
+  "description": "User-supplied public research evidence, NOT independently verified trend data.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "domain",
+    "observation",
+    "risk",
+    "sourceUrl",
+    "at",
+    "evidenceStatus"
+  ],
+  "properties": {
+    "schema": {
+      "const": "bodybagz.opportunity.v1"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 130
+    },
+    "domain": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "observation": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 1500
+    },
+    "risk": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 700
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 600
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evidenceStatus": {
+      "const": "user-supplied-unverified"
+    }
+  }
+}
