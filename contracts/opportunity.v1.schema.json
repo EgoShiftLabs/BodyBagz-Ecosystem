@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/opportunity.v1.schema.json",
-  "title": "BodyBagz source-backed opportunity, v1",
-  "description": "User-supplied public research evidence, NOT independently verified trend data.",
   "type": "object",
   "additionalProperties": false,
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/opportunity.v1.schema.json",
+  "title": "BodyBagz opportunity v1",
+  "description": "User-supplied source notes; unverified, not a live trend feed.",
   "required": [
     "schema",
     "id",

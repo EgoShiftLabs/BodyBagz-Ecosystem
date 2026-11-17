@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/pairing-review.v1.schema.json",
-  "title": "BodyBagz local pairing research checklist v1",
-  "description": "Self-attested due diligence only. No token launch, guaranteed quote eligibility or approval.",
   "type": "object",
   "additionalProperties": false,
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/pairing-review.v1.schema.json",
+  "title": "BodyBagz pairing research v1",
+  "description": "Self-attested eligibility checklist, no on-chain execution.",
   "required": [
     "schema",
     "id",
@@ -44,7 +44,7 @@
     },
     "notice": {
       "type": "string",
-      "maxLength": 300
+      "maxLength": 450
     }
   }
 }

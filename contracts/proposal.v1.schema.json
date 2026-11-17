@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/proposal.v1.schema.json",
-  "title": "BodyBagz local project draft, v1",
-  "description": "Browser-only user proposal. Never implies receipt, acceptance or endorsement.",
   "type": "object",
   "additionalProperties": false,
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/proposal.v1.schema.json",
+  "title": "BodyBagz Forge project proposal v1",
+  "description": "Local draft; not official program approval or submission.",
   "required": [
     "schema",
     "id",
@@ -65,7 +65,7 @@
     },
     "notice": {
       "type": "string",
-      "maxLength": 320
+      "maxLength": 400
     }
   }
 }

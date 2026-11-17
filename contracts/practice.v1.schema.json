@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/practice.v1.schema.json",
-  "title": "UGLY DUCK TEK unverified local practice record",
-  "description": "This JSON can be edited or fabricated by the browser owner and is NOT a verified certificate, NFT or authorization.",
   "type": "object",
   "additionalProperties": false,
+  "$id": "https://egoshiftlabs.github.io/BodyBagz-Ecosystem/contracts/practice.v1.schema.json",
+  "title": "UGLY DUCK TEK local practice export",
+  "description": "Self-reported and browser-editable. Not an NFT or verified certificate.",
   "required": [
     "schema",
     "kind",
@@ -25,7 +25,7 @@
     },
     "notice": {
       "type": "string",
-      "maxLength": 350
+      "maxLength": 450
     },
     "results": {
       "type": "object",
