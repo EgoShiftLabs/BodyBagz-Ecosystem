@@ -1,0 +1,11 @@
+{
+  "name": "bodybagz-ecosystem",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "check": "node --check assets/app.js && node --check core/kit.js && node --check core/storage.js && node --check core/contracts.js && node --check core/catalog.js && node --check modules/home.js && node --check modules/ugly-duck-tek.js && node --check modules/watchtower-crypto.js && node --check modules/bagz-forge.js && node --check modules/pairing-desk.js && node --check modules/architecture.js",
+    "test": "node --test tests/*.test.js",
+    "quality": "npm run check && npm test"
+  }
+}
