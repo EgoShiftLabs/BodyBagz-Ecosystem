@@ -48,6 +48,3 @@ See [SECURITY.md](docs/SECURITY.md), [ROADMAP.md](docs/ROADMAP.md), and [ARCHITE
 These components can be extracted into separate repositories without changing their role: UGLY DUCK TEK is the education standard; Watchtower Crypto is independent market/cultural research; BAGZ Forge is BodyBagz-specific incubation; the pairing desk is optional quote-asset research; Watchtower OS remains separately branded and independently marketable.
 
 **Cultural imagination is not a guarantee of future income or token returns.** This project encourages original IP, useful products, better evidence, honest risk management and long-term builder capacity.
-
-## Independent V0.1 audit
-The [independent audit handoff](docs/GROK_AUDIT_HANDOFF.md) provides a full QA checklist, evidence links, explicit functional limitations and a ranked-findings request for an external reviewer. This is an integration preview; dedicated UGLY DUCK TEK and Watchtower Crypto repositories remain unchanged pending approval.
