@@ -13,7 +13,7 @@ export const field=(name,label,opts={})=>'<div class="field '+(opts.full?"span-a
  (opts.multiline?'<textarea class="textarea" id="'+esc(name)+'" name="'+esc(name)+'" maxlength="'+(opts.max||1200)+'" placeholder="'+esc(opts.placeholder||"")+'"'+(opts.required?" required":"")+'></textarea>':
  opts.choices?'<select class="select" id="'+esc(name)+'" name="'+esc(name)+'"'+(opts.required?" required":"")+'>'+opts.choices.map(o=>'<option value="'+esc(o[0])+'">'+esc(o[1])+'</option>').join("")+'</select>':
  '<input class="input" id="'+esc(name)+'" name="'+esc(name)+'" type="'+esc(opts.type||"text")+'" maxlength="'+(opts.max||160)+'" placeholder="'+esc(opts.placeholder||"")+'"'+(opts.required?" required":"")+'>'+
- '</div>';
+ '</div>');
 export const empty=(msg)=>'<div class="empty">'+esc(msg)+'</div>';
 export const evidenceLink=(url,label="Original source")=>validUrl(url)?'<a class="text-link" href="'+safeUrl(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+' ↗</a>':'<span class="muted">Source not yet provided</span>';
 export function downloadJson(filename,obj){
