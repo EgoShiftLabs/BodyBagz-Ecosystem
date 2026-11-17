@@ -10,11 +10,11 @@ export const tag=(value,type="")=>'<span class="tag '+(type?"tag-"+type:"")+'">'
 export const navButton=(text,route,primary=false)=>'<a class="btn '+(primary?"btn-primary":"btn-ghost")+'" href="#/'+esc(route)+'">'+esc(text)+' <span aria-hidden="true">↗</span></a>';
 export const btn=(label,action,id="",klass="")=>'<button type="button" class="btn '+klass+'" data-action="'+esc(action)+'"'+(id?' data-id="'+esc(id)+'"':"")+'>'+esc(label)+'</button>';
 export const field=(name,label,opts={})=>{
- const key=esc(name),required=opts.required?" required":"",val=opts.value??"";
+ const key=esc(opts.id||name),formName=esc(name),required=opts.required?" required":"",val=opts.value??"";
  let control;
- if(opts.multiline)control='<textarea class="textarea" id="'+key+'" name="'+key+'" maxlength="'+(opts.max||1200)+'" placeholder="'+esc(opts.placeholder||"")+'"'+required+'>'+esc(val)+'</textarea>';
- else if(opts.choices)control='<select class="select" id="'+key+'" name="'+key+'"'+required+'>'+opts.choices.map(o=>'<option value="'+esc(o[0])+'"'+(String(o[0])===String(val)?" selected":"")+'>'+esc(o[1])+'</option>').join("")+'</select>';
- else control='<input class="input" id="'+key+'" name="'+key+'" type="'+esc(opts.type||"text")+'" maxlength="'+(opts.max||160)+'" placeholder="'+esc(opts.placeholder||"")+'" value="'+esc(val)+'"'+required+'>';
+ if(opts.multiline)control='<textarea class="textarea" id="'+key+'" name="'+formName+'" maxlength="'+(opts.max||1200)+'" placeholder="'+esc(opts.placeholder||"")+'"'+required+'>'+esc(val)+'</textarea>';
+ else if(opts.choices)control='<select class="select" id="'+key+'" name="'+formName+'"'+required+'>'+opts.choices.map(o=>'<option value="'+esc(o[0])+'"'+(String(o[0])===String(val)?" selected":"")+'>'+esc(o[1])+'</option>').join("")+'</select>';
+ else control='<input class="input" id="'+key+'" name="'+formName+'" type="'+esc(opts.type||"text")+'" maxlength="'+(opts.max||160)+'" placeholder="'+esc(opts.placeholder||"")+'" value="'+esc(val)+'"'+required+'>';
  return '<div class="field '+(opts.full?"span-all":"")+'"><label for="'+key+'">'+esc(label)+'</label>'+control+'</div>';
 };
 export const empty=(msg)=>'<div class="empty">'+esc(msg)+'</div>';
