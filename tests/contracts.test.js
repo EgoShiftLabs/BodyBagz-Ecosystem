@@ -1,5 +1,5 @@
 import test from "node:test";import assert from "node:assert/strict";
-import {CONTRACTS,opportunity,kolEntry,projectProposal,proposalFromSignal,pairingReview,verifyEnvelope} from "../core/contracts.js";
+import {CONTRACTS,opportunity,kolEntry,projectProposal,proposalFromSignal,reviseProposal,reviewReady,pairingReview,verifyEnvelope} from "../core/contracts.js";
 import {blankState,validateState} from "../core/storage.js";
 import {LESSONS,progress} from "../modules/ugly-duck-tek.js";
 test("six complete builder modules, each with five questions",()=>{
@@ -54,4 +54,30 @@ test("all four published schema identifiers match the runtime contracts",async()
   assert.ok(json.required.includes("schema"));
   assert.equal(json.properties.schema.const,CONTRACTS[kind]);
  }
+});
+
+test("source handoffs are unreviewed, retain the original source and require edited deliverables",()=>{
+ const forwarded=proposalFromSignal({title:"Original media builders",id:"signal-source",observation:"Published makers are organizing a new original media collaboration",risk:"The interest could be temporary or manipulated",sourceUrl:"https://example.org/record"});
+ assert.equal(forwarded.sourceUrl,"https://example.org/record");
+ assert.equal(forwarded.reviewPrepared,false);
+ assert.equal(reviewReady(forwarded),false);
+ const early=reviseProposal(forwarded,{name:forwarded.name,category:"Music & audio",pitch:forwarded.pitch,value:forwarded.value,risk:forwarded.risk});
+ assert.ok(early.error);
+ const edited=reviseProposal(forwarded,{name:"Original media builders",category:"Music & audio",pitch:"Publish original creator-owned collaborations for aspiring artists.",value:"Participants receive a reviewed publishing workflow and monthly creative showcases.",risk:"Copyright claims and low retention require rights agreements and audience feedback."});
+ assert.equal(edited.error,undefined);
+ assert.equal(edited.value.id,forwarded.id);
+ assert.equal(edited.value.status,"draft");
+ assert.equal(edited.value.reviewPrepared,true);
+ assert.equal(reviewReady(edited.value),true);
+});
+test("research links require HTTPS to avoid downgrade and malformed origins",()=>{
+ assert.ok(opportunity({title:"An example",observation:"A documented pattern in a published research article",risk:"Alternative explanations are plausible",sourceUrl:"http://example.org/story",domain:"Other"}).error);
+ assert.ok(kolEntry({handle:"@example",url:"http://example.org/user",note:""}).error);
+});
+test("state schema accepts additive proposal provenance without turning it into a verified approval",()=>{
+ const state=blankState();
+ state.proposals=[{id:"draft",name:"Original audio network",category:"Music & audio",pitch:"Build an original music collaboration platform for the public.",value:"Deliver creator-owned releases and simple rights agreements.",risk:"Unclear rights should be independently reviewed before release.",signalId:"signal-1",sourceUrl:"https://example.org/record",reviewPrepared:true,status:"draft",at:"2026-11-17T14:00:00Z"}];
+ assert.equal(validateState(state),true);
+ state.proposals[0].reviewPrepared="verified-official";
+ assert.equal(validateState(state),false);
 });
