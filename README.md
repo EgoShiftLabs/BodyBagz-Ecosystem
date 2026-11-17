@@ -4,7 +4,7 @@
 A culture-first builder development preview that connects **UGLY DUCK TEK**, **Watchtower Crypto**, **BAGZ Forge**, and the **BAGZ Pairing Desk**. The parent project is **BodyBagz**; these modules are modular software and educational components, not one combined token protocol.
 
 ## Open the preview
-- GitHub Pages (after Pages is enabled): https://egoshiftlabs.github.io/BodyBagz-Ecosystem/
+- GitHub Pages (branch deployment succeeded November 17, 2026): https://egoshiftlabs.github.io/BodyBagz-Ecosystem/
 - Repository: https://github.com/EgoShiftLabs/BodyBagz-Ecosystem
 - BodyBagz culture/project: https://bodybagz.org
 - Watchtower OS remains a separate public product: https://egoshiftlabs.github.io/EgoShiftLabs-Watchtower-OS/
@@ -37,7 +37,7 @@ npm run quality
 Do not open index.html via file:// if your browser blocks ES module imports. The hosted version works from the repository's GitHub Pages base path because imports use relative URLs.
 
 ## Deploying GitHub Pages
-The workflow \`.github/workflows/pages.yml\` is committed. For a newly created repository, **GitHub Pages may still need to be enabled manually**: Settings → Pages → Build and deployment → Source: GitHub Actions. Then Actions → Publish BodyBagz Ecosystem preview → Run workflow. The workflow's successful deployment, not the existence of the YAML file, confirms the live URL.
+GitHub Pages is now enabled and deployed successfully from the main branch using GitHub's own Pages build-and-deployment pipeline (confirmed successful run November 17, 2026). Changes to main automatically rebuild the site. A separate custom Actions publisher was intentionally removed because it conflicted with the enabled branch-source deployment and lacked permission to create the Pages site. The quality workflow in .github/workflows/quality.yml still runs Node and Chromium checks on every push. For final live-UI validation, perform a browser/device check as well; an Actions success alone is not full accessibility verification.
 
 ## Security and governance
 No cryptocurrency transfers, authenticated certificates, or public project submissions are supported here. Completing a browser-local practice quiz does NOT authorize any transaction. The future certificate and official builder gate will require an independent verifiable credential issuer, identity/authorization system and explicit consent. Any token launch pairing with $BAGZ must verify the EXACT mint, provider eligibility, liquidity/fee mechanics, token distribution, conflicts, IP and lawful disclosures with current official sources. Do not publish private keys, wallet seeds, personal info or credentials in research forms.
@@ -48,3 +48,6 @@ See [SECURITY.md](docs/SECURITY.md), [ROADMAP.md](docs/ROADMAP.md), and [ARCHITE
 These components can be extracted into separate repositories without changing their role: UGLY DUCK TEK is the education standard; Watchtower Crypto is independent market/cultural research; BAGZ Forge is BodyBagz-specific incubation; the pairing desk is optional quote-asset research; Watchtower OS remains separately branded and independently marketable.
 
 **Cultural imagination is not a guarantee of future income or token returns.** This project encourages original IP, useful products, better evidence, honest risk management and long-term builder capacity.
+
+## Independent V0.1 audit
+The [independent audit handoff](docs/GROK_AUDIT_HANDOFF.md) provides a full QA checklist, evidence links, explicit functional limitations and a ranked-findings request for an external reviewer. This is an integration preview; dedicated UGLY DUCK TEK and Watchtower Crypto repositories remain unchanged pending approval.

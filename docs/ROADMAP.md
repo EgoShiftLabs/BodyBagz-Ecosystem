@@ -8,8 +8,8 @@
 - [x] Original project builder form, draft board, practice-gated review preview and export
 - [x] Research-only BAGZ pairing checklist with zero wallet execution
 - [x] Four versioned cross-module JSON contracts
-- [x] Static deployment workflow, Node checks, Chromium desktop/mobile smoke workflow
-- [ ] Verify GitHub Pages is enabled and deployed successfully in this brand new repository
+- [x] Branch-source GitHub Pages deployment, Node checks and Chromium desktop/mobile smoke workflow
+- [x] GitHub Pages enabled; GitHub's branch-source build and deploy succeeded November 17, 2026
 - [ ] Physical mobile accessibility and screen-reader testing
 
 ## V0.2 — Make modules production-capable without mixing responsibilities
