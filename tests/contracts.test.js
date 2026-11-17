@@ -1,6 +1,6 @@
 import test from "node:test";import assert from "node:assert/strict";
 import {CONTRACTS,opportunity,kolEntry,projectProposal,proposalFromSignal,reviseProposal,reviewReady,pairingReview,verifyEnvelope} from "../core/contracts.js";
-import {blankState,validateState} from "../core/storage.js";
+import {blankState,validateState,migrateStateV1} from "../core/storage.js";
 import {LESSONS,progress} from "../modules/ugly-duck-tek.js";
 test("six complete builder modules, each with five questions",()=>{
  assert.equal(LESSONS.length,6);
@@ -80,4 +80,14 @@ test("state schema accepts additive proposal provenance without turning it into 
  assert.equal(validateState(state),true);
  state.proposals[0].reviewPrepared="verified-official";
  assert.equal(validateState(state),false);
+});
+
+test("V0.1 review previews are safely downgraded for explicit new confirmation without data loss",()=>{
+ const legacy=blankState();
+ legacy.proposals.push({id:"draft-1",name:"Original project",category:"Music & audio",pitch:"A detailed original cultural music project and website.",value:"Build an open resource for creators and educational partners.",risk:"Creative rights and moderation require independent oversight.",signalId:"old",status:"review-preview",at:"2026-11-17T14:00:00Z"});
+ const result=migrateStateV1(legacy);
+ assert.ok(result);
+ assert.equal(result.proposals[0].status,"draft");
+ assert.equal(result.proposals[0].value,legacy.proposals[0].value);
+ assert.equal(legacy.proposals[0].status,"review-preview"); // Pure migration, no mutation.
 });

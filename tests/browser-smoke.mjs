@@ -149,6 +149,18 @@ try{
  // Keyboard access to routes and forms (limited smoke, NOT a screen-reader audit).
  await mobile.keyboard.press("Tab");
  assert.equal(await mobile.evaluate(()=>document.activeElement?.tagName!=="BODY"),true);
+ // Verify primary study navigation and Forge form are keyboard-operable.
+ await page.locator('[data-nav="learn"]').click();
+ await page.locator('[data-action="open-lesson"][data-id="orientation"]').focus();
+ await page.keyboard.press("Enter");
+ await page.locator('#lessonQuiz[data-lesson-id="orientation"]').waitFor({timeout:7000});
+ await page.locator('[data-action="close-lesson"]').first().focus();
+ await page.keyboard.press("Enter");
+ await page.locator('#lessonQuiz').waitFor({state:"detached"});
+ await page.locator('[data-nav="forge"]').click();
+ await page.locator('#proposalForm #name').focus();
+ await page.keyboard.press("Tab");
+ assert.equal(await page.evaluate(()=>document.activeElement?.id),"category");
  assert.equal(errors.length,0,errors.join("\n"));
  console.log("V0.2 browser smoke: failed quiz and retry, restore lesson, export, KOL CRUD, HTTPS validation, reviewed Forge plan, explicit gate, independent pairing forms, delete cascade, no-JS overview and mobile PASS.");
 }catch(e){console.error("V0.2 browser smoke failed:",e);process.exitCode=1;}finally{await browser.close();}

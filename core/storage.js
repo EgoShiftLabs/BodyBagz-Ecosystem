@@ -16,17 +16,19 @@ export function validateState(s){
  if(!arr(s.pairingReviews,80)||s.pairingReviews.some(x=>!x||!str(x.id,100)||!str(x.proposalId,110)||!str(x.at,40)||!x.checks||typeof x.checks!=="object"||Array.isArray(x.checks)||Object.keys(x.checks).length>12||Object.values(x.checks).some(y=>typeof y!=="boolean")))return false;
  return true;
 }
+export function migrateStateV1(input){
+ if(!validateState(input))return null;
+ // Backward-compatible V0.2 safety upgrade. Retain all user content; do not trust an old preview flag.
+ const copy=JSON.parse(JSON.stringify(input));
+ for(const p of copy.proposals){
+  if(p.status==="review-preview"&&p.reviewPrepared!==true)p.status="draft";
+ }
+ return copy;
+}
 export function loadState(){
  try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return blankState();
- const obj=JSON.parse(raw);
- if(validateState(obj)){
-  // Older V0.1 browser drafts were allowed to advance without editing.
-  // Reset ONLY those old review previews to drafts, preserving all their text and linked research.
-  for(const proposal of obj.proposals){
-   if(proposal.status==="review-preview"&&proposal.reviewPrepared!==true)proposal.status="draft";
-  }
-  return obj;
- }
+ const obj=migrateStateV1(JSON.parse(raw));
+ if(obj)return obj;
  console.warn("BodyBagz saved preview data was rejected; state reset.");
  }catch(e){console.warn("Unable to read browser preview data.",e);}
  return blankState();
