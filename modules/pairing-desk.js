@@ -13,7 +13,7 @@ export function renderPairing(state){
  const n=RISKS.filter((x,i)=>r.checks["check"+i]===true).length;
  return '<section class="panel"><div class="panel-title"><div><span class="eyebrow">RESEARCH CASE / '+esc(r.id.slice(-8).toUpperCase())+'</span><h2 style="margin:12px 0 2px">'+esc(project?.name||"Linked project missing")+'</h2><p>Created '+esc(fmtDate(r.at))+' · Status: <strong>RESEARCH ONLY</strong></p></div>'+tag(n+"/"+RISKS.length+" RESEARCH CHECKS","gold")+'</div>'+
  '<div class="notice"><b>These checks are self-attestations, not technical validation.</b> A checked box does not establish mint eligibility, regulatory compliance, liquidity depth or team authority.</div>'+
- '<form id="pairingReviewForm" data-review-id="'+esc(r.id)+'"><div class="stack">'+RISKS.map((label,i)=>'<label class="check-item"><input type="checkbox" name="check'+i+'"'+(r.checks["check"+i]?" checked":"")+'><span>'+esc(label)+'<small>Review evidence outside this prototype; unresolved questions remain unresolved.</small></span></label>').join("")+'</div><div class="form-actions"><button type="submit" class="btn btn-primary">Save research checklist</button>'+btn("Export review JSON","export-pairing",r.id)+btn("Remove local case","remove-pairing",r.id,"btn-danger")+'</div></form></section>';
+ '<form id="pairingReviewForm-'+esc(r.id)+'" class="pairing-review-form" data-review-id="'+esc(r.id)+'"><div class="stack">'+RISKS.map((label,i)=>'<label class="check-item"><input type="checkbox" name="check'+i+'"'+(r.checks["check"+i]?" checked":"")+'><span>'+esc(label)+'<small>Review evidence outside this prototype; unresolved questions remain unresolved.</small></span></label>').join("")+'</div><div class="form-actions"><button type="submit" class="btn btn-primary">Save research checklist</button>'+btn("Export review JSON","export-pairing",r.id)+btn("Remove local case","remove-pairing",r.id,"btn-danger")+'</div></form></section>';
  }).join("")+'</div>':empty("No pairing review cases yet. Complete UGLY DUCK TEK practice tracks, mark a Forge proposal ready for local review, then open a research case here."))+
  '<div class="section-heading"><div><h2>Future integration gates</h2><p>These are requirements to build, not capabilities of V0.1.</p></div></div>'+
  '<div class="grid grid-2">'+[
@@ -24,7 +24,7 @@ export function renderPairing(state){
  ].map(x=>'<article class="panel"><div class="eyebrow">'+esc(x[0])+'</div><h3 style="margin-top:17px">'+esc(x[1])+'</h3><p>'+esc(x[2])+'</p></article>').join("")+'</div>';
 }
 export function handlePairingSubmit(form,ctx){
- if(form.id!=="pairingReviewForm")return false;
+ if(!form.classList.contains("pairing-review-form"))return false;
  const r=ctx.state.pairingReviews.find(x=>x.id===form.dataset.reviewId);if(!r)return true;
  const data=new FormData(form);r.checks={};
  RISKS.forEach((x,i)=>{r.checks["check"+i]=data.has("check"+i);});

@@ -21,7 +21,7 @@ export function kolEntry(input){
 export function projectProposal(input){
  const obj={schema:CONTRACTS.proposal,id:uid("forge"),name:trim(input.name,130),category:trim(input.category,60),
   pitch:trim(input.pitch,1500),value:trim(input.value,1600),risk:trim(input.risk,1100),signalId:trim(input.signalId,110),
-  status:"draft",at:dateStamp()};
+  status:"draft",at:dateStamp(),reviewPrepared:false,sourceUrl:trim(input.sourceUrl||"",600)};
  if(obj.name.length<4||obj.pitch.length<25||obj.value.length<25||obj.risk.length<15)return {error:"Include a project name, clear pitch (25+), concrete value (25+) and risk plan (15+)."};
  return {value:obj};
 }
@@ -30,7 +30,21 @@ export function proposalFromSignal(signal){
  return {schema:CONTRACTS.proposal,id:uid("forge"),name:trim(signal.title,130),category:"Cultural concept",
   pitch:trim("Research inspiration: "+signal.observation,1500),value:"Define original user value and actual deliverables before review.",
   risk:trim("Source is user-entered and unverified. Original risk note: "+signal.risk,1100),
-  signalId:signal.id,status:"draft",at:dateStamp()};
+  signalId:signal.id,status:"draft",at:dateStamp(),reviewPrepared:false,sourceUrl:trim(signal.sourceUrl||"",600)};
+}
+// A human must explicitly revise/confirm a draft before simulated review; not a server-side authorization control.
+export function reviewReady(p){
+ return Boolean(p&&p.reviewPrepared===true&&p.pitch?.length>=25&&p.value?.length>=25&&p.risk?.length>=15&&
+ !p.pitch.startsWith("Research inspiration:")&&
+ !p.value.startsWith("Define original user value")&&
+ !p.risk.startsWith("Source is user-entered and unverified."));
+}
+export function reviseProposal(original,input){
+ const draft=projectProposal({...input,signalId:original.signalId,sourceUrl:original.sourceUrl});
+ if(draft.error)return draft;
+ const next={...original,name:draft.value.name,category:draft.value.category,pitch:draft.value.pitch,value:draft.value.value,risk:draft.value.risk,reviewPrepared:true,status:"draft"};
+ if(!reviewReady(next))return {error:"Rewrite the original pitch, value, and risk placeholders with a concrete original project plan before review."};
+ return {value:next};
 }
 export function pairingReview(proposalId){return {schema:CONTRACTS.pairing,id:uid("pair"),proposalId,at:dateStamp(),checks:{}};}
 export function verifyEnvelope(envelope,kind){

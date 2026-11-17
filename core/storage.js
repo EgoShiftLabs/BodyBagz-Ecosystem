@@ -12,7 +12,7 @@ export function validateState(s){
  if(s.practicePass!==null&&(!s.practicePass||s.practicePass.kind!=="local-practice-only"||!str(s.practicePass.completedAt,40)||!str(s.practicePass.id,110)))return false;
  if(!arr(s.signals,120)||s.signals.some(x=>!x||!str(x.id,100)||!str(x.title,130)||!str(x.domain,60)||!str(x.observation,1500)||!str(x.risk,700)||!str(x.sourceUrl,600)||!str(x.at,40)))return false;
  if(!arr(s.kolWatch,80)||s.kolWatch.some(x=>!x||!str(x.id,100)||!str(x.handle,90)||!str(x.url,600)||!str(x.note,500)))return false;
- if(!arr(s.proposals,80)||s.proposals.some(x=>!x||!str(x.id,100)||!str(x.name,130)||!str(x.category,60)||!str(x.pitch,1500)||!str(x.value,1600)||!str(x.risk,1100)||!str(x.signalId,110)||!str(x.at,40)||!["draft","review-preview"].includes(x.status)))return false;
+ if(!arr(s.proposals,80)||s.proposals.some(x=>!x||!str(x.id,100)||!str(x.name,130)||!str(x.category,60)||!str(x.pitch,1500)||!str(x.value,1600)||!str(x.risk,1100)||!str(x.signalId,110)||(x.sourceUrl!==undefined&&!str(x.sourceUrl,600))||(x.reviewPrepared!==undefined&&typeof x.reviewPrepared!=="boolean")||!str(x.at,40)||!["draft","review-preview"].includes(x.status)))return false;
  if(!arr(s.pairingReviews,80)||s.pairingReviews.some(x=>!x||!str(x.id,100)||!str(x.proposalId,110)||!str(x.at,40)||!x.checks||typeof x.checks!=="object"||Array.isArray(x.checks)||Object.keys(x.checks).length>12||Object.values(x.checks).some(y=>typeof y!=="boolean")))return false;
  return true;
 }
