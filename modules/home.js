@@ -21,7 +21,7 @@ export function renderHome(state){
  '<div class="grid split" style="margin-top:20px"><section class="panel"><div class="eyebrow">WHY THIS EXISTS</div><h2 style="margin:22px 0 10px">Build the capacity.<br><span class="gold">Not just the hype.</span></h2><p>BodyBagz started with culture, music and resilience. This ecosystem adds education, verified research habits, developer incubation and practical tools so participants can prepare for changing ways of working and earning.</p>'+
  '<p>There is room for music, art, software, community ventures and other original creations. A token is an optional design choice—not the definition of success.</p>'+
  '<div class="btn-row">'+navButton("Read the architecture","architecture",true)+'<a class="btn btn-ghost" href="https://bodybagz.org" target="_blank" rel="noopener noreferrer">Visit BodyBagz.org ↗</a></div></section>'+
- '<section class="panel"><div class="eyebrow">SYSTEM STATE / V0.1</div><h3 style="margin-top:20px">What’s actually working</h3><div class="stack">'+[
+ '<section class="panel"><div class="eyebrow">SYSTEM STATE / V0.2</div><h3 style="margin-top:20px">What’s actually working</h3><div class="stack">'+[
  ["ON","Six practical learning tracks and quiz scoring"],
  ["ON","Manual sourced research and KOL watchlist"],
  ["ON","Builder drafts, cross-module idea transfer"],

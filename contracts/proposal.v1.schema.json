@@ -66,6 +66,15 @@
     "notice": {
       "type": "string",
       "maxLength": 400
+    },
+    "reviewPrepared": {
+      "type": "boolean",
+      "description": "Local-only acknowledgement of a revised project draft; not a credential or program approval."
+    },
+    "sourceUrl": {
+      "type": "string",
+      "maxLength": 600,
+      "description": "Optional original user-entered public research URL; unverified by this interface."
     }
   }
 }

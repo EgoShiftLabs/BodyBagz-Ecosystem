@@ -44,7 +44,13 @@ export const LESSONS=[
  MC("A sustainable handoff should include…",["Documentation and clear responsibilities","An inaccessible private key","No maintenance plan"],0),
  MC("Good builders should be prepared to…",["Change course when the evidence demands it","Ignore all criticism","Guarantee investment results"],0)
 ]}];
+const LESSON_SESSION_KEY="bodybagz.lesson-open.v1";
 let openId=null;
+try{
+ const stored=typeof sessionStorage!=="undefined"?sessionStorage.getItem(LESSON_SESSION_KEY):null;
+ if(LESSONS.some(l=>l.id===stored))openId=stored;
+}catch{/* Session storage may be unavailable; curriculum remains usable. */}
+
 export function progress(state){
  const passed=LESSONS.filter(l=>state.lessons[l.id]?.passed).length;
  return {passed,total:LESSONS.length,complete:passed===LESSONS.length,percent:Math.round(passed/LESSONS.length*100)};
@@ -73,8 +79,8 @@ function renderDetail(l,state){
  '<div class="form-actions"><button class="btn btn-primary" type="submit">Check my understanding →</button>'+btn("Return to curriculum","close-lesson")+'</div></form></article>';
 }
 export function handleLearnAction(action,id,ctx){
- if(action==="open-lesson"){if(!LESSONS.some(x=>x.id===id))return true;openId=id;ctx.render();return true;}
- if(action==="close-lesson"){openId=null;ctx.render();return true;}
+ if(action==="open-lesson"){if(!LESSONS.some(x=>x.id===id))return true;openId=id;try{if(typeof sessionStorage!=="undefined")sessionStorage.setItem(LESSON_SESSION_KEY,id);}catch{}ctx.render();return true;}
+ if(action==="close-lesson"){openId=null;try{if(typeof sessionStorage!=="undefined")sessionStorage.removeItem(LESSON_SESSION_KEY);}catch{}ctx.render();return true;}
  if(action==="export-practice"){
   const p=progress(ctx.state);if(!p.complete||!ctx.state.practicePass){ctx.toast("Finish all six tracks first.");return true;}
   downloadJson("ugly-duck-tek-local-practice.json",{schema:CONTRACTS.practice,kind:"local-practice-only",notice:"No authenticated identity, NFT issuance or external recognition.",completedAt:ctx.state.practicePass.completedAt,results:ctx.state.lessons});ctx.toast("Practice record exported to your device.");return true;
